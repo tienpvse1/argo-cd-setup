@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: private-reg
+  labels:
+    name: simple-k8s-app
+spec:
+  containers:
+  - name: private-reg-container
+    image: tienpvse/k8s-simple:latest
+    imagePullPolicy: Always
+    env:
+      - name: POSTGRES_HOST
+        valueFrom:
+          configMapKeyRef:
+            name: app-config
+            key: postgresHost
+      - name: POSTGRES_PORT
+        valueFrom:
+          configMapKeyRef:
+            name: app-config
+            key: postgresPort
+      - name: POSTGRES_DB
+        valueFrom:
+          configMapKeyRef:
+            name: app-config
+            key: postgresDatabase
+      - name: POSTGRES_USER
+        valueFrom:
+          secretKeyRef:
+            name: app-secret
+            key: postgresUsername
+      - name: POSTGRES_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: app-secret
+            key: postgresPassword
+  imagePullSecrets:
+  - name: regcred
+
