@@ -91,7 +91,6 @@ jobs:
         with:
           repository: tienpvse1/argocd-platform
       - name: Update image tag using sed
-        uses: actions/checkout@v4
         run: |
           cd deployments
           sed -E -i'' 's#(tienpvse/k8s-simple:)[^ ]*#\1'"${{ github.sha }}""'#' values.yaml
