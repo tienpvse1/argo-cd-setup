@@ -64,6 +64,6 @@ jobs:
           cache: 'pnpm'
       - name: Install
         run: pnpm install
-      - name: Build
-        run: npm run test:unit
+      - name: Test
+        run: npm run test
 
