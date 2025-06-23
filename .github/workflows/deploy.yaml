@@ -1,6 +1,8 @@
 on: 
   - workflow_dispatch
     
+permissions:
+  contents: write
 name: Deploy to dev env
 
 jobs:
@@ -82,8 +84,6 @@ jobs:
           docker push ${{ github.actor }}/k8s-simple:${{ github.sha }}
 
   update-image-tag:
-    permissions:
-      contents: write
     name: update image tag
     needs: build-and-push-image
     runs-on: ubuntu-latest
