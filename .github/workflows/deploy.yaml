@@ -86,7 +86,7 @@ jobs:
     needs: build-and-push-image
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout profile repo
+      - name: Checkout deployment repo
         uses: actions/checkout@v4
         with:
           repository: tienpvse1/argocd-platform
@@ -98,7 +98,6 @@ jobs:
       - name: Commit and push changes (if any)
         shell: bash
         run: |
-          cd profile
           git config --global user.name "tienpvse1"
           git config --global user.email "${{ secrets.ACTOR_EMAIL }}"
           if [[ `git status --porcelain --untracked-files=no` ]]; then
