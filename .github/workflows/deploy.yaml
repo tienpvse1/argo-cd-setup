@@ -95,7 +95,7 @@ jobs:
       - name: Update image tag using sed
         run: |
           cd deployments
-          sed -E -i'' 's#(tienpvse/k8s-simple:)[^ ]*#\1'"${{ github.sha }}"'#' values.yaml
+          sed -E -i'' 's#(${{ github.actor }}/k8s-simple:)[^ ]*#\1'"${{ github.sha }}"'#' values.yaml
 
       - name: Commit and push changes (if any)
         shell: bash
