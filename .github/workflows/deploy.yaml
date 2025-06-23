@@ -1,6 +1,5 @@
 on: 
   - workflow_dispatch
-    
 permissions:
   contents: write
 name: Deploy to dev env
@@ -100,8 +99,8 @@ jobs:
       - name: Commit and push changes (if any)
         shell: bash
         run: |
-          git config --global user.name "tienpvse1"
-          git config --global user.email "${{ secrets.ACTOR_EMAIL }}"
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
           if [[ `git status --porcelain --untracked-files=no` ]]; then
             # Changes
             git add .
