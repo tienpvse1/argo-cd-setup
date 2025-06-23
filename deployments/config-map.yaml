@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: app-config
-data:
-  postgresPort: "5432"
-  postgresHost: "postgres-svc"
-  postgresDatabase: "postgres"
