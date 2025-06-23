@@ -9,6 +9,7 @@ import { KyselyModule } from "./kysely/kysely.module";
 	imports: [
 		ConfigModule.forRoot({
 			load: [config],
+			envFilePath: [`.env.${process.env.NODE_ENV}`, ".env"],
 		}),
 		KyselyModule.registerAsync({
 			imports: [ConfigModule],

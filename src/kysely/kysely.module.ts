@@ -26,7 +26,7 @@ export class KyselyModule extends ConfigurableModuleClass {
 			dialect,
 		});
 
-		const moduleConfig = KyselyModule.register(options);
+		const moduleConfig = super.register(options);
 		return {
 			...moduleConfig,
 			providers: [
@@ -47,7 +47,7 @@ export class KyselyModule extends ConfigurableModuleClass {
 	}
 
 	static registerAsync(options: typeof ASYNC_OPTIONS_TYPE): DynamicModule {
-		const value = KyselyModule.registerAsync(options);
+		const value = super.registerAsync(options);
 
 		return {
 			...value,
