@@ -91,6 +91,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: tienpvse1/argocd-platform
+          token: ${{ secrets.REPO_AT }}
       - name: Update image tag using sed
         run: |
           cd deployments
