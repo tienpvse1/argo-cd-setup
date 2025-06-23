@@ -76,7 +76,7 @@ jobs:
       - name: Build image
         run: docker build . --file Dockerfile --tag ${{ github.actor }}/testing-container:${{ github.sha }}
       - name: Log in to registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.DOCKER_CREDENTIAL }}" | docker login -u ${{ github.actor }} --password-stdin
       - name: Push image
         run: |
           docker push ${{ github.actor }}/testing-container:${{ github.sha }}
