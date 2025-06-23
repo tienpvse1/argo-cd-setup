@@ -3,14 +3,36 @@ on:
 name: Deploy to dev env
 
 jobs:
-  deploy:
-    name: Deploy
+  codequality:
+    name: Check code quality
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install
-        run: npm install
+        run: pnpm install
       - name: Build
         run: npm run build
+  build:
+    name: Build source
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install
+        run: pnpm install
+      - name: Build
+        run: npm run build
+
+  test:
+    name: Running unit test
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install
+        run: pnpm install
+      - name: Build
+        run: npm run test:unit
 
