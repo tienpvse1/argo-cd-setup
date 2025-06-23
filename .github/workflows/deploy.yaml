@@ -102,7 +102,7 @@ jobs:
           git config --global user.email "${{ secrets.ACTOR_EMAIL }}"
           if [[ `git status --porcelain --untracked-files=no` ]]; then
             # Changes
-            git add README.md
+            git add .
             git commit -m "update version"
             git push
           else
