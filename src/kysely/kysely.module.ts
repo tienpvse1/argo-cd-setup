@@ -1,15 +1,15 @@
-import { DynamicModule, Inject, Module } from "@nestjs/common";
-import { Kysely, PostgresDialect } from "kysely";
-import { Pool } from "pg";
+import { DynamicModule, Inject, Module } from '@nestjs/common';
+import { Kysely, PostgresDialect } from 'kysely';
+import { Pool } from 'pg';
 import {
 	ASYNC_OPTIONS_TYPE,
 	ConfigurableModuleClass,
 	MODULE_OPTIONS_TOKEN,
 	OPTIONS_TYPE,
-} from "./module-definition";
-import { Database } from "./schema"; // this is the Database interface we defined earlier
+} from './module-definition';
+import { Database } from './schema'; // this is the Database interface we defined earlier
 
-export const KYSEKY_INJECT_TOKEN = "KYSEKY_INJECT_TOKEN";
+export const KYSEKY_INJECT_TOKEN = 'KYSEKY_INJECT_TOKEN';
 
 export function InjectKysely() {
 	return Inject(KYSEKY_INJECT_TOKEN);

@@ -1,13 +1,13 @@
-import { createMock } from "@golevelup/ts-vitest";
-import { Test, TestingModule } from "@nestjs/testing";
-import { Kysely } from "kysely";
-import { vi } from "vitest";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
-import { KYSEKY_INJECT_TOKEN } from "./kysely/kysely.module";
-import { Database } from "./kysely/schema";
+import { createMock } from '@golevelup/ts-vitest';
+import { KYSEKY_INJECT_TOKEN } from '@kysely';
+import { Database } from '@kysely/schema';
+import { Test, TestingModule } from '@nestjs/testing';
+import { Kysely } from 'kysely';
+import { AppController } from 'src/app.controller';
+import { AppService } from 'src/app.service';
+import { vi } from 'vitest';
 
-describe("AppController", () => {
+describe('AppController', () => {
 	let appController: AppController;
 	let appService: AppService;
 
@@ -31,9 +31,9 @@ describe("AppController", () => {
 		vi.clearAllMocks();
 	});
 
-	describe("root", () => {
-		it("should return list of user by calling getHello", async () => {
-			vi.spyOn(appService, "getHello").mockResolvedValue([]);
+	describe('root', () => {
+		it('should return list of user by calling getHello', async () => {
+			vi.spyOn(appService, 'getHello').mockResolvedValue([]);
 			expect(appController.getHello()).resolves.toMatchObject([]);
 		});
 	});

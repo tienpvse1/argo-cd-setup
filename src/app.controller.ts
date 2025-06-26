@@ -1,5 +1,5 @@
-import { Controller, Get, Patch, Post } from "@nestjs/common";
-import { AppService } from "./app.service";
+import { Controller, Get, Patch, Post } from '@nestjs/common';
+import { AppService } from 'src/app.service';
 
 @Controller()
 export class AppController {
@@ -10,17 +10,17 @@ export class AppController {
 		return this.appService.getHello();
 	}
 
-	@Get("/new")
+	@Get('/new')
 	getNewHello() {
 		return this.appService.getHello();
 	}
 
-	@Post("/")
+	@Post('/')
 	createUser() {
 		return this.appService.getHello();
 	}
 
-	@Patch("/")
+	@Patch('/')
 	updateUser() {
 		return this.appService.getHello();
 	}

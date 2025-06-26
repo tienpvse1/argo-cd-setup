@@ -14,6 +14,7 @@
 		"code-quality:check": "pnpm exec biome check",
 		"code-quality:fix": "pnpm exec biome check --fix",
 		"test": "vitest run",
+		"test:ui": "vitest --ui",
 		"test:watch": "vitest",
 		"test:cov": "vitest run --coverage",
 		"test:debug": "vitest --inspect-brk --inspect --logHeapUsage --threads=false",
@@ -27,10 +28,15 @@
 		"@nestjs/config": "^4.0.2",
 		"@nestjs/core": "^11.0.1",
 		"@nestjs/platform-express": "^11.0.1",
+		"@nestjs/swagger": "^11.2.0",
+		"@scalar/nestjs-api-reference": "^0.5.6",
+		"better-auth": "^1.2.10",
 		"kysely": "^0.28.2",
+		"nestjs-zod": "^4.3.1",
 		"pg": "^8.16.2",
 		"reflect-metadata": "^0.2.2",
-		"rxjs": "^7.8.1"
+		"rxjs": "^7.8.1",
+		"zod": "^3.25.67"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.0.5",
@@ -46,6 +52,7 @@
 		"@types/pg": "^8.15.4",
 		"@types/supertest": "^6.0.2",
 		"@vitest/coverage-v8": "^3.2.4",
+		"@vitest/ui": "3.2.4",
 		"dotenv": "^16.5.0",
 		"globals": "^16.0.0",
 		"kysely-ctl": "^0.13.1",
@@ -56,14 +63,8 @@
 		"tsconfig-paths": "^4.2.0",
 		"typescript": "^5.7.3",
 		"unplugin-swc": "^1.5.5",
+		"vite-tsconfig-paths": "^5.1.4",
 		"vitest": "^3.2.4"
-	},
-	"jest": {
-		"transform": {
-			"^.+\\.(t|j)s?$": [
-				"@swc/jest"
-			]
-		}
 	},
 	"packageManager": "pnpm@10.11.0+sha512.6540583f41cc5f628eb3d9773ecee802f4f9ef9923cc45b69890fb47991d4b092964694ec3a4f738a420c918a333062c8b925d312f42e4f0c263eb603551f977"
 }
