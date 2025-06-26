@@ -19,8 +19,8 @@
 		"test:cov": "vitest run --coverage",
 		"test:debug": "vitest --inspect-brk --inspect --logHeapUsage --threads=false",
 		"test:e2e": "vitest run --config ./vitest.config.e2e.ts",
-		"migration:new": "touch ./migrations/$(date +%Y%m%d%H%M%S)_migration.ts",
-		"migration:run": "kysely migrate:up",
+		"migration:new": "./migration.sh",
+		"migration:run": "kysely migrate:latest",
 		"migration:rollback": "kysely migrate:down"
 	},
 	"dependencies": {

@@ -20,7 +20,10 @@ function fromOption(options: typeof OPTIONS_TYPE) {
 	const dialect = new PostgresDialect({
 		pool,
 	});
-	return new Kysely<Database>({ dialect, plugins: [new CamelCasePlugin()] });
+	return new Kysely<Database>({
+		dialect,
+		// plugins: [new CamelCasePlugin()]
+	});
 }
 
 @Module({})

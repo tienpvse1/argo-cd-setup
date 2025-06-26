@@ -7,9 +7,7 @@ export const BetterAuthToken = Symbol();
 
 @Module({})
 export class BetterAuthModule extends BetterAuthModuleTemplate.ConfigurableModuleClass {
-	private static initAuth(
-		config: typeof BetterAuthModuleTemplate.OPTIONS_TYPE,
-	) {
+	static initAuth(config: typeof BetterAuthModuleTemplate.OPTIONS_TYPE) {
 		const auth = betterAuth({
 			plugins: [openAPI({ path: '/docs' })],
 			database: {
@@ -63,6 +61,7 @@ export class BetterAuthModule extends BetterAuthModuleTemplate.ConfigurableModul
 			...originModule,
 			providers: [...originProviders, authProvider],
 			exports: [...originExports, authProvider],
+			global: true,
 		};
 	}
 }
