@@ -22,7 +22,7 @@ function fromOption(options: typeof OPTIONS_TYPE) {
 	});
 	return new Kysely<Database>({
 		dialect,
-		// plugins: [new CamelCasePlugin()]
+		plugins: [new CamelCasePlugin()],
 	});
 }
 

@@ -5,13 +5,14 @@ import { BetterAuthModuleTemplate } from './better-auth.module-definition';
 
 export const BetterAuthToken = Symbol();
 
+export type BetterAuthInstance = ReturnType<typeof BetterAuthModule.initAuth>;
 @Module({})
 export class BetterAuthModule extends BetterAuthModuleTemplate.ConfigurableModuleClass {
 	static initAuth(config: typeof BetterAuthModuleTemplate.OPTIONS_TYPE) {
 		const auth = betterAuth({
 			plugins: [openAPI({ path: '/docs' })],
 			database: {
-				db: config.database,
+				db: config.database.withoutPlugins(),
 				type: 'postgres',
 			},
 			emailAndPassword: {
@@ -36,6 +37,7 @@ export class BetterAuthModule extends BetterAuthModuleTemplate.ConfigurableModul
 
 		return {
 			...originModule,
+			global: true,
 			providers: [...originProviders, authProvider],
 			exports: [...originExports, authProvider],
 		};
