@@ -1,8 +1,6 @@
 import { DynamicModule, Module, Provider } from '@nestjs/common';
 import { betterAuth } from 'better-auth';
 import { openAPI } from 'better-auth/plugins';
-import { PostgresDialect } from 'kysely';
-import { Pool } from 'pg';
 import { BetterAuthModuleTemplate } from './better-auth.module-definition';
 
 export const BetterAuthToken = Symbol();
@@ -12,17 +10,10 @@ export class BetterAuthModule extends BetterAuthModuleTemplate.ConfigurableModul
 	private static initAuth(
 		config: typeof BetterAuthModuleTemplate.OPTIONS_TYPE,
 	) {
-		const dialect = new PostgresDialect({
-			pool: new Pool(config.database),
-		});
 		const auth = betterAuth({
-			plugins: [
-				openAPI({
-					path: '/docs',
-				}),
-			],
+			plugins: [openAPI({ path: '/docs' })],
 			database: {
-				dialect,
+				db: config.database,
 				type: 'postgres',
 			},
 			emailAndPassword: {

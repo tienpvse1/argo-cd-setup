@@ -7,6 +7,7 @@ export class UserService {
 	constructor(@InjectKysely() private readonly kysely: Kysely<Database>) {}
 
 	async findAll() {
-		return this.kysely.selectFrom('user').selectAll().execute();
+		const users = await this.kysely.selectFrom('user').selectAll().execute();
+		return users;
 	}
 }

@@ -9,12 +9,12 @@ import {
 
 export interface UserTable {
 	id: Generated<number>;
-	first_name: string;
+	firstName: string;
 	gender: 'man' | 'woman' | 'other';
-	last_name: string | null;
-	created_at: ColumnType<Date, string | undefined, never>;
+	lastName: string | null;
+	createdAt: ColumnType<Date, string | undefined, never>;
 	metadata: JSONColumnType<{
-		login_at: string;
+		loginAt: string;
 		ip: string | null;
 		agent: string | null;
 		plan: 'free' | 'premium';

@@ -10,4 +10,5 @@ export function initAuth(app: INestApplication) {
 	const expressApp = express();
 	expressApp.all('/api/auth/{*auth}', toNodeHandler(betterAuthInstance));
 	app.use(expressApp);
+	return betterAuthInstance;
 }

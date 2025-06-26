@@ -1,13 +1,8 @@
+import { KyselyInstance } from '@kysely';
 import { ConfigurableModuleBuilder } from '@nestjs/common';
 
 type BetterAuthConfig = {
-	database: {
-		host: string;
-		port: number;
-		user: string;
-		password: string;
-		database: string;
-	};
+	database: KyselyInstance;
 };
 
 export const BetterAuthModuleTemplate =
