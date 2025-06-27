@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AbstractUserRepository } from '../applications/adapters/user.repository';
-import { UserRepository } from './user.repository';
+import { UserRelationalRepository } from './relational/user.repository';
 
 @Module({
 	providers: [
 		{
 			provide: AbstractUserRepository,
-			useClass: UserRepository,
+			useClass: UserRelationalRepository,
 		},
 	],
-	exports: [],
+	exports: [AbstractUserRepository],
 })
 export class UserInfrastructureModule {}

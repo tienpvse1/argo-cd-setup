@@ -3,13 +3,13 @@ import { Injectable } from '@nestjs/common';
 import {
 	AbstractUserRepository,
 	SearchUserInput,
-} from '../applications/adapters/user.repository';
-import { User } from '../domains/user';
+} from '../../applications/adapters/user.repository';
+import { User } from '../../domains/entities/user';
 import { SearchUserSchema } from './inputs/search-user.input';
 import { UserMapper } from './user.mapper';
 
 @Injectable()
-export class UserRepository implements AbstractUserRepository {
+export class UserRelationalRepository implements AbstractUserRepository {
 	constructor(@InjectKysely() private readonly kysely: KyselyInstance) {}
 
 	async findAll(input: SearchUserInput): Promise<User[]> {
