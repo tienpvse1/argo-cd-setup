@@ -1,5 +1,5 @@
 import { User as UserTable } from '@kysely';
-import { User } from '../domains/user';
+import { User } from '../../domains/entities/user';
 
 export class UserMapper {
 	static toDomain(user: UserTable): User {
