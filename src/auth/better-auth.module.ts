@@ -15,14 +15,31 @@ export function InjectBetterAuth() {
 export class BetterAuthModule extends BetterAuthModuleTemplate.ConfigurableModuleClass {
 	static initAuth(config: typeof BetterAuthModuleTemplate.OPTIONS_TYPE) {
 		const auth = betterAuth({
+			user: {
+				additionalFields: {
+					metadata: {
+						type: 'string',
+					},
+				},
+			},
+
 			plugins: [
 				bearer(),
 				openAPI({ path: '/docs' }),
 				jwt({
+					jwt: {
+						definePayload: ({ user }) => {
+							return {
+								id: user.id,
+								email: user.email,
+								role: user.role,
+								isAdmin: user.metadata.isAdmin,
+							};
+						},
+					},
 					jwks: {
 						keyPairConfig: {
-							alg: 'EdDSA',
-							crv: 'Ed25519',
+							alg: 'RS256',
 						},
 					},
 				}),

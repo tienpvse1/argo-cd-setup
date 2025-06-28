@@ -1,3 +1,4 @@
+import { Policy } from '@auth/permission/permission.decorator';
 import { Controller, Get, Patch, Post } from '@nestjs/common';
 import { AppService } from 'src/app.service';
 
@@ -6,6 +7,7 @@ export class AppController {
 	constructor(private readonly appService: AppService) {}
 
 	@Get()
+	@Policy({ permissions: [{ can: 'manage', subject: 'all' }] })
 	getHello() {
 		return this.appService.getHello();
 	}

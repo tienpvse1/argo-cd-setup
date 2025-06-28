@@ -1,5 +1,11 @@
 export default function () {
 	return {
+		app: {
+			host: process.env.APP_HOST ?? 'localhost:3000',
+		},
+		betterAuth: {
+			url: process.env.BETTER_AUTH_URL,
+		},
 		postgres: {
 			host: process.env.POSTGRES_HOST,
 			port: parseInt(process.env.POSTGRES_PORT ?? '5432'),
