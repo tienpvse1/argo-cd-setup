@@ -2,16 +2,16 @@
 
 /* eslint-disable */
 /* prettier-ignore */
-import { Path } from "nestjs-i18n";
+import { Path } from 'nestjs-i18n';
 /* prettier-ignore */
 export type I18nTranslations = {
-    "index": {
-        "message": {
-            "hello": string;
-            "world": string;
-            "test": string;
-        };
-    };
+	index: {
+		message: {
+			hello: string;
+			world: string;
+			test: string;
+		};
+	};
 };
 /* prettier-ignore */
 export type I18nPath = Path<I18nTranslations>;

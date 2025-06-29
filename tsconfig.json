@@ -17,6 +17,9 @@
 		"noImplicitAny": false,
 		"strictBindCallApply": false,
 		"noFallthroughCasesInSwitch": false,
+		"typeRoots": [
+			"./src/types"
+		],
 		"paths": {
 			"@modules/*": [
 				"./src/modules/*"

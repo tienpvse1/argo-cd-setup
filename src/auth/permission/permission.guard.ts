@@ -22,8 +22,12 @@ export class PolicyGuard implements CanActivate {
 		}
 
 		const user = context.switchToHttp().getRequest<Request>().user;
+		if (!user) {
+			return false;
+		}
 
 		const ability = this.createForUser(user);
+		user.ability = ability;
 
 		if (policy.requireAll) {
 			return policy.permissions.every((permission) =>
@@ -35,9 +39,7 @@ export class PolicyGuard implements CanActivate {
 		);
 	}
 
-	private createForUser(
-		user: (Express.User & { isAdmin?: boolean }) | undefined,
-	) {
+	private createForUser(user: Express.User | undefined) {
 		const { can, build } = new AbilityBuilder<AppAbility>(createMongoAbility);
 
 		if (user?.isAdmin) {
