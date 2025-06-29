@@ -6,11 +6,11 @@ export const DatabaseModule = KyselyModule.registerAsync({
 	inject: [ConfigService],
 	useFactory(config: ConfigService) {
 		return {
-			host: config.getOrThrow<string>('postgres.host'),
-			port: config.getOrThrow<number>('postgres.port'),
-			user: config.getOrThrow<string>('postgres.user'),
-			password: config.getOrThrow<string>('postgres.password'),
-			database: config.getOrThrow<string>('postgres.db'),
+			host: config.get<string>('postgres.host', 'localhost'),
+			port: config.get<number>('postgres.port', 5432),
+			user: config.get<string>('postgres.user', 'postgres'),
+			password: config.get<string>('postgres.password', 'postgres'),
+			database: config.get<string>('postgres.db', 'postgres'),
 			max: config.get<number>('postgres.max'),
 		};
 	},

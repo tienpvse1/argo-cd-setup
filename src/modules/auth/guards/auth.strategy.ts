@@ -12,7 +12,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 				cache: true,
 				rateLimit: true,
 				jwksRequestsPerMinute: 5,
-				jwksUri: `${config.getOrThrow('betterAuth.url')}/api/auth/jwks`,
+				jwksUri: `${config.get('betterAuth.url', 'http://localhost:3000')}/api/auth/jwks`,
 			}),
 			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 		});
