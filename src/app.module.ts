@@ -1,13 +1,16 @@
 import { PolicyGuard } from '@auth/permission/permission.guard';
+import { PermissionModule } from '@auth/permission/permission.module';
 import { AuthModule } from '@common/auth.module-config';
 import { I18nModule } from '@common/i18n.module-config';
 import { DatabaseModule } from '@common/kysely.module-config';
+import { KyselyInjectToken, KyselyInstance } from '@kysely';
 import { AuthModule as ExposedAuthModule } from '@modules/auth/auth.module';
 import { JwtAuthGuard } from '@modules/auth/guards/auth.guard';
 import { UserModule } from '@modules/user/user.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
+import { CqrsModule } from '@nestjs/cqrs';
 import { resolveEnv } from '@utils/resolve-env';
 import { ZodSerializerInterceptor, ZodValidationPipe } from 'nestjs-zod';
 import { AppController } from 'src/app.controller';
@@ -16,10 +19,20 @@ import config from 'src/config/env.config';
 
 @Module({
 	imports: [
+		CqrsModule.forRoot(),
 		ConfigModule.forRoot({
 			load: [config],
 			envFilePath: resolveEnv(),
 			isGlobal: true,
+		}),
+		PermissionModule.registerAsync({
+			imports: [DatabaseModule],
+			inject: [KyselyInjectToken],
+			useFactory(kysely: KyselyInstance) {
+				return {
+					kysely,
+				};
+			},
 		}),
 		DatabaseModule,
 		AuthModule,

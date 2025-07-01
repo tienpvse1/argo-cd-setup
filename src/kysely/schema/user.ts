@@ -8,7 +8,7 @@ import {
 } from 'kysely';
 
 export interface UserTable {
-	id: Generated<number>;
+	id: Generated<string>;
 	firstName: string;
 	gender: 'man' | 'woman' | 'other';
 	lastName: string | null;
@@ -19,6 +19,10 @@ export interface UserTable {
 		agent: string | null;
 		plan: 'free' | 'premium';
 	}>;
+	updatedAt: ColumnType<Date, string | undefined, never>;
+	banned?: boolean;
+	banReason?: string;
+	role?: string;
 }
 
 export type User = Selectable<UserTable>;

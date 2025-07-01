@@ -1,8 +1,8 @@
 import { User as UserTable } from '@kysely';
-import { User } from '../../domains/entities/user';
+import { UserEntity } from '../../domains/entities/user';
 
 export class UserMapper {
-	static toDomain(user: UserTable): User {
+	static toDomain(user: UserTable): UserEntity {
 		return {
 			id: user.id,
 			firstName: user.firstName,
@@ -13,7 +13,7 @@ export class UserMapper {
 		};
 	}
 
-	static toDomains(users: UserTable[]): User[] {
+	static toDomains(users: UserTable[]): UserEntity[] {
 		return users.map((user) => this.toDomain(user));
 	}
 }

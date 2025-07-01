@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AuthInfraModule } from '../infrastructures/auth.infra-module';
-import { AuthService } from './auth.service';
+import { AuthUseCases } from './use-cases';
 
 @Module({
-	providers: [AuthService],
-	exports: [AuthService],
+	providers: [...AuthUseCases],
 	imports: [AuthInfraModule.withAuthAdapter('better-auth')],
 })
 export class AuthApplicationModule {}

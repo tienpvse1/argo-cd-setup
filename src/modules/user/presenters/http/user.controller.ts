@@ -1,12 +1,18 @@
-import { UserService } from '@modules/user/applications/user.service';
-import { Controller, Get } from '@nestjs/common';
+import { Policy } from '@auth/permission/permission.decorator';
+import { SearchUserQuery } from '@modules/user/domains/queries/search-user.query';
+import { Controller, Get, Query } from '@nestjs/common';
+import { QueryBus } from '@nestjs/cqrs';
+import { SearchUserDto } from './dto/search-user.dto';
 
 @Controller('user')
 export class UserController {
-	constructor(private readonly userService: UserService) {}
+	constructor(private readonly queriesBus: QueryBus) {}
 
 	@Get()
-	findAll() {
-		return this.userService.findAll();
+	@Policy({ permissions: [{ can: 'manage', subject: 'user' }] })
+	findAll(@Query() input: SearchUserDto) {
+		return this.queriesBus.execute(
+			new SearchUserQuery(input.offset, input.limit, input.q),
+		);
 	}
 }

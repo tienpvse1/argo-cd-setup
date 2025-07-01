@@ -3,8 +3,8 @@ import { Injectable } from '@nestjs/common';
 import {
 	AbstractUserRepository,
 	SearchUserInput,
-} from '../../applications/adapters/user.repository';
-import { User } from '../../domains/entities/user';
+} from '../../applications/ports/user.repository';
+import { UserEntity } from '../../domains/entities/user';
 import { SearchUserSchema } from './inputs/search-user.input';
 import { UserMapper } from './user.mapper';
 
@@ -12,7 +12,7 @@ import { UserMapper } from './user.mapper';
 export class UserRelationalRepository implements AbstractUserRepository {
 	constructor(@InjectKysely() private readonly kysely: KyselyInstance) {}
 
-	async findAll(input: SearchUserInput): Promise<User[]> {
+	async findAll(input: SearchUserInput): Promise<UserEntity[]> {
 		const parsedInput = SearchUserSchema.safeParse(input);
 		if (parsedInput.error) throw new Error('invalid filter');
 		let query = this.kysely.selectFrom('user').selectAll();
@@ -29,7 +29,7 @@ export class UserRelationalRepository implements AbstractUserRepository {
 		return UserMapper.toDomains(users);
 	}
 
-	async create(user: Omit<User, 'id'>): Promise<User> {
+	async create(user: Omit<UserEntity, 'id'>): Promise<UserEntity> {
 		const createdUser = await this.kysely
 			.insertInto('user')
 			.values({

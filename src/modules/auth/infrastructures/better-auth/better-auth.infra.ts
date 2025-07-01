@@ -1,8 +1,13 @@
 import { BetterAuthInstance, InjectBetterAuth } from '@auth';
+import { InjectKysely, KyselyInstance } from '@kysely';
 import { AuthOutboundPort } from '@modules/auth/applications/ports/auth.outbound-port';
 import { AuthEntity } from '@modules/auth/domains/entities/auth.entity';
 import { UserExists } from '@modules/auth/domains/errors/user-existed.error';
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+	Injectable,
+	InternalServerErrorException,
+	Logger,
+} from '@nestjs/common';
 import { APIError } from 'better-auth/api';
 import { Request } from 'express';
 import { BetterAuthMapper } from './mapper';
@@ -11,6 +16,7 @@ import { BetterAuthMapper } from './mapper';
 export class BetterAuthInfrastructure implements AuthOutboundPort {
 	constructor(
 		@InjectBetterAuth() private readonly betterAuth: BetterAuthInstance,
+		@InjectKysely() private readonly kysely: KyselyInstance,
 	) {}
 
 	async login(input: { email: string; password: string }): Promise<AuthEntity> {
@@ -41,6 +47,7 @@ export class BetterAuthInfrastructure implements AuthOutboundPort {
 					name: input.name,
 					email: input.email,
 					password: input.password,
+					metadata: JSON.stringify({}),
 				},
 			});
 			return BetterAuthMapper.entityFromSignIn({
@@ -62,5 +69,23 @@ export class BetterAuthInfrastructure implements AuthOutboundPort {
 			headers: request.headers as Record<string, string>,
 		});
 		return response.success;
+	}
+
+	async updateRole(userId: string, role: string): Promise<boolean> {
+		try {
+			const result = await this.kysely
+				.updateTable('user')
+				.set({ role })
+				.where('id', '=', userId)
+				.returningAll()
+				.executeTakeFirst();
+			if (!result) {
+				Logger.error(`User with id ${userId} not found`);
+				return false;
+			}
+			return true;
+		} catch {
+			return false;
+		}
 	}
 }

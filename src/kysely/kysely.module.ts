@@ -9,10 +9,10 @@ import {
 } from './module-definition';
 import { Database } from './schema';
 
-export const KYSEKY_INJECT_TOKEN = 'KYSEKY_INJECT_TOKEN';
+export const KyselyInjectToken = 'KYSEKY_INJECT_TOKEN';
 
 export function InjectKysely() {
-	return Inject(KYSEKY_INJECT_TOKEN);
+	return Inject(KyselyInjectToken);
 }
 
 function fromOption(options: typeof OPTIONS_TYPE) {
@@ -33,7 +33,7 @@ export class KyselyModule extends ConfigurableModuleClass {
 		const originalProviders = orginal.providers ?? [];
 		const originalExports = orginal.exports ?? [];
 		const dbProvider = {
-			provide: KYSEKY_INJECT_TOKEN,
+			provide: KyselyInjectToken,
 			useValue: fromOption(options),
 		};
 
@@ -52,7 +52,7 @@ export class KyselyModule extends ConfigurableModuleClass {
 		const originalExports = original.exports ?? [];
 
 		const databaseProvider: Provider = {
-			provide: KYSEKY_INJECT_TOKEN,
+			provide: KyselyInjectToken,
 			inject: [MODULE_OPTIONS_TOKEN],
 			useFactory(options: typeof OPTIONS_TYPE) {
 				return fromOption(options);

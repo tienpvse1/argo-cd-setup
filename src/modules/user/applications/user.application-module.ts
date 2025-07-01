@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { UserInfrastructureModule } from '../infrastructures/user-infra.module';
-import { UserService } from './user.service';
+import { UserUseCases } from './use-cases';
 
 @Module({
-	providers: [UserService],
-	exports: [UserService],
+	providers: [...UserUseCases],
 	imports: [UserInfrastructureModule],
 })
 export class UserApplicationModule {}

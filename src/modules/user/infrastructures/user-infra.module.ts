@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AbstractUserRepository } from '../applications/adapters/user.repository';
+import { AbstractUserRepository } from '../applications/ports/user.repository';
 import { UserRelationalRepository } from './relational/user.repository';
 
 @Module({

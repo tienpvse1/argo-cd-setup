@@ -2,16 +2,26 @@ import {
 	AbilityBuilder,
 	createMongoAbility,
 	ExtractSubjectType,
+	Subject,
 } from '@casl/ability';
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import {
+	CanActivate,
+	ExecutionContext,
+	Inject,
+	Injectable,
+} from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
-import { AppAbility, Subjects } from './permission';
 import { PolicyArgs, PolicyKey } from './permission.decorator';
+import { PermissionFromDB, PermissionsInjectToken } from './permission.module';
 
 @Injectable()
 export class PolicyGuard implements CanActivate {
-	constructor(private readonly reflector: Reflector) {}
+	constructor(
+		private readonly reflector: Reflector,
+		@Inject(PermissionsInjectToken)
+		private readonly permission: PermissionFromDB[],
+	) {}
 	canActivate(context: ExecutionContext) {
 		const policy = this.reflector.getAllAndOverride<PolicyArgs>(PolicyKey, [
 			context.getHandler(),
@@ -40,18 +50,21 @@ export class PolicyGuard implements CanActivate {
 	}
 
 	private createForUser(user: Express.User | undefined) {
-		const { can, build } = new AbilityBuilder<AppAbility>(createMongoAbility);
+		const { can, build } = new AbilityBuilder(createMongoAbility);
 
-		if (user?.isAdmin) {
-			can('manage', 'all');
-		} else {
-			can('read', 'all');
-		}
+		this.permission.forEach((permission) => {
+			if (
+				user?.role === permission.name &&
+				permission.can &&
+				permission.subject
+			) {
+				can(permission.can, permission.subject);
+			}
+		});
 
 		return build({
-			detectSubjectType: (item: {
-				constructor: ExtractSubjectType<Subjects>;
-			}) => item.constructor,
+			detectSubjectType: (item: { constructor: ExtractSubjectType<Subject> }) =>
+				item.constructor,
 		});
 	}
 }

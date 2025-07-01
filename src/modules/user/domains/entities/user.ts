@@ -1,5 +1,5 @@
-export class User {
-	id: number;
+export class UserEntity {
+	id: string;
 	firstName: string;
 	metadata: {
 		loginAt: Date;

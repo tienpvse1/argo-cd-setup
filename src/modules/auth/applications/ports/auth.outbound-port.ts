@@ -16,4 +16,5 @@ export abstract class AuthOutboundPort {
 	abstract login(input: LoginInput): Promise<AuthEntity>;
 	abstract register(input: RegisterInput): Promise<AuthEntity>;
 	abstract logout(request: Request): Promise<boolean>;
+	abstract updateRole(userId: string, role: string): Promise<boolean>;
 }

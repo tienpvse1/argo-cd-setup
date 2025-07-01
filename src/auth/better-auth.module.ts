@@ -1,6 +1,6 @@
 import { DynamicModule, Inject, Module, Provider } from '@nestjs/common';
 import { betterAuth } from 'better-auth';
-import { bearer, jwt, openAPI } from 'better-auth/plugins';
+import { admin, bearer, jwt, openAPI } from 'better-auth/plugins';
 import { BetterAuthModuleTemplate } from './better-auth.module-definition';
 
 export const BetterAuthToken = Symbol();
@@ -22,9 +22,11 @@ export class BetterAuthModule extends BetterAuthModuleTemplate.ConfigurableModul
 					},
 				},
 			},
-
 			plugins: [
 				bearer(),
+				admin({
+					defaultRole: 'regular-user',
+				}),
 				openAPI({ path: '/docs' }),
 				jwt({
 					jwt: {

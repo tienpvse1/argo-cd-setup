@@ -1,9 +1,9 @@
 import { BetterAuthModule } from '@auth';
-import { KYSEKY_INJECT_TOKEN, KyselyInstance, KyselyModule } from '@kysely';
+import { KyselyInjectToken, KyselyInstance, KyselyModule } from '@kysely';
 
 export const AuthModule = BetterAuthModule.registerAsync({
 	imports: [KyselyModule],
-	inject: [KYSEKY_INJECT_TOKEN],
+	inject: [KyselyInjectToken],
 	useFactory(kyselyInstance: KyselyInstance) {
 		return {
 			database: kyselyInstance,

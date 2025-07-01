@@ -1,5 +1,5 @@
 import { createMock } from '@golevelup/ts-vitest';
-import { KYSEKY_INJECT_TOKEN } from '@kysely';
+import { KyselyInjectToken } from '@kysely';
 import { Database } from '@kysely/schema';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Kysely } from 'kysely';
@@ -17,7 +17,7 @@ describe('AppController', () => {
 			providers: [AppService],
 		})
 			.useMocker((token) => {
-				if (token === KYSEKY_INJECT_TOKEN) {
+				if (token === KyselyInjectToken) {
 					return createMock<Kysely<Database>>({});
 				}
 			})
