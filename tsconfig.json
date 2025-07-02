@@ -18,32 +18,33 @@
 		"strictBindCallApply": false,
 		"noFallthroughCasesInSwitch": false,
 		"typeRoots": [
-			"./src/types"
+			"apps/testing-container/src/types",
+			"node_modules/@types"
 		],
 		"paths": {
-			"@modules/*": [
-				"./src/modules/*"
-			],
-			"@utils/*": [
-				"./src/utils/*"
-			],
-			"@common/*": [
-				"./src/common/*"
-			],
-			"@i18n/*": [
-				"./src/i18n/*"
-			],
-			"@kysely": [
-				"./src/kysely/index.ts"
-			],
-			"@kysely/*": [
-				"./src/kysely/*"
-			],
 			"@auth": [
-				"./src/auth/index.ts"
+				"apps/testing-container/src/auth/index.ts"
 			],
 			"@auth/*": [
-				"./src/auth/*"
+				"apps/testing-container/src/auth/*"
+			],
+			"@common/*": [
+				"apps/testing-container/src/common/*"
+			],
+			"@i18n/*": [
+				"apps/testing-container/src/i18n/*"
+			],
+			"@kysely": [
+				"apps/testing-container/src/kysely/index.ts"
+			],
+			"@kysely/*": [
+				"apps/testing-container/src/kysely/*"
+			],
+			"@modules/*": [
+				"apps/testing-container/src/modules/*"
+			],
+			"@utils/*": [
+				"apps/testing-container/src/utils/*"
 			]
 		}
 	}

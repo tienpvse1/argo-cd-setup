@@ -13,9 +13,9 @@ import { APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { CqrsModule } from '@nestjs/cqrs';
 import { resolveEnv } from '@utils/resolve-env';
 import { ZodSerializerInterceptor, ZodValidationPipe } from 'nestjs-zod';
-import { AppController } from 'src/app.controller';
-import { AppService } from 'src/app.service';
-import config from 'src/config/env.config';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import config from './config/env.config';
 
 @Module({
 	imports: [
@@ -58,4 +58,4 @@ import config from 'src/config/env.config';
 		{ provide: APP_INTERCEPTOR, useClass: ZodSerializerInterceptor },
 	],
 })
-export class AppModule {}
+export class AppModule { }

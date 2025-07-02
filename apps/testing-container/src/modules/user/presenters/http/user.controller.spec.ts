@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserController } from './user.controller';
-import { UserService } from './user.service';
+import { vi } from 'vitest'
+import { QueryBus } from '@nestjs/cqrs';
 
 describe('UserController', () => {
 	let controller: UserController;
@@ -8,7 +9,10 @@ describe('UserController', () => {
 	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
 			controllers: [UserController],
-			providers: [UserService],
+		}).useMocker(token => {
+			if (token == QueryBus) return {
+				publish: vi.fn()
+			}
 		}).compile();
 
 		controller = module.get<UserController>(UserController);

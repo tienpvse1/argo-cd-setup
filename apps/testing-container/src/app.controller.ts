@@ -1,12 +1,12 @@
 import { Policy } from '@auth/permission/permission.decorator';
 import { Controller, Get } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
-import { AppService } from 'src/app.service';
+import { AppService } from './app.service';
 
 @ApiBearerAuth()
 @Controller()
 export class AppController {
-	constructor(private readonly appService: AppService) {}
+	constructor(private readonly appService: AppService) { }
 
 	@Get()
 	@Policy({ permissions: [{ can: 'manage', subject: 'all' }] })
