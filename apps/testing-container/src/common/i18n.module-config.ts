@@ -11,10 +11,10 @@ export const I18nModule = BaseI18nModule.forRoot({
 	fallbackLanguage: 'en',
 	typesOutputPath: path.join(
 		__dirname,
-		'../../src/generated/i18n.generated.ts',
+		'../../../apps/testing-container/src/generated/i18n.generated.ts',
 	),
 	loaderOptions: {
-		path: path.join(__dirname, '..', '/i18n/'),
+		path: path.join(__dirname, '..', 'testing-container/i18n/'),
 		watch: true,
 	},
 	resolvers: [
