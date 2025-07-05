@@ -7,7 +7,13 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"includes": ["src/**/*.ts", "src/**/*.js", "migrations/**/*.ts"]
+		"includes": [
+			"apps/**/*.ts",
+			"apps/**/*.js",
+			"libs/**/*.ts",
+			"libs/**/*.js",
+			"migrations/**/*.ts"
+		]
 	},
 	"formatter": {
 		"enabled": true,

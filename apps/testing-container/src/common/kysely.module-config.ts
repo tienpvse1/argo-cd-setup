@@ -1,5 +1,5 @@
-import { KyselyModule } from '@kysely';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { KyselyModule } from '@third-parties/kysely';
 
 export const DatabaseModule = KyselyModule.registerAsync({
 	imports: [ConfigModule],

@@ -2,7 +2,10 @@
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
 		"declaration": false,
-		"outDir": "../../dist/apps/testing-container"
+		"outDir": "../../dist/apps/testing-container",
+		"typeRoots": [
+			"apps/testing-container/src/types"
+		]
 	},
 	"include": [
 		"src/**/*"

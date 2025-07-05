@@ -1,5 +1,6 @@
 import { BetterAuthModule } from '@auth';
-import { KyselyInjectToken, KyselyInstance, KyselyModule } from '@kysely';
+import { KyselyInstance } from '@kysely';
+import { KyselyInjectToken, KyselyModule } from '@third-parties/kysely';
 
 export const AuthModule = BetterAuthModule.registerAsync({
 	imports: [KyselyModule],

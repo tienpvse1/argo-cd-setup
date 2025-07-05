@@ -1,5 +1,5 @@
 import { Policy } from '@auth/permission/permission.decorator';
-import { IsPublic } from '@common/decorators/is-public.decorator';
+import { IsPublic } from '@internal';
 import { LoginCommand } from '@modules/auth/domains/commands/login.command';
 import { SignupCommand } from '@modules/auth/domains/commands/register.command';
 import { UpdateRoleCommand } from '@modules/auth/domains/commands/update-role.command';

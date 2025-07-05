@@ -3,9 +3,9 @@ import { KyselyInjectToken } from '@kysely';
 import { Database } from '@kysely/schema';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Kysely } from 'kysely';
+import { vi } from 'vitest';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { vi } from 'vitest';
 
 describe('AppController', () => {
 	let appController: AppController;

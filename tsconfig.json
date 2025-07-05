@@ -18,7 +18,6 @@
 		"strictBindCallApply": false,
 		"noFallthroughCasesInSwitch": false,
 		"typeRoots": [
-			"apps/testing-container/src/types",
 			"node_modules/@types"
 		],
 		"paths": {
@@ -34,6 +33,12 @@
 			"@i18n/*": [
 				"apps/testing-container/src/i18n/*"
 			],
+			"@internal": [
+				"libs/internal/src"
+			],
+			"@internal/*": [
+				"libs/internal/src/*"
+			],
 			"@kysely": [
 				"apps/testing-container/src/kysely/index.ts"
 			],
@@ -42,6 +47,12 @@
 			],
 			"@modules/*": [
 				"apps/testing-container/src/modules/*"
+			],
+			"@third-parties": [
+				"libs/third-parties/src"
+			],
+			"@third-parties/*": [
+				"libs/third-parties/src/*"
 			],
 			"@utils/*": [
 				"apps/testing-container/src/utils/*"

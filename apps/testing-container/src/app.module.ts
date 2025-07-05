@@ -3,16 +3,17 @@ import { PermissionModule } from '@auth/permission/permission.module';
 import { AuthModule } from '@common/auth.module-config';
 import { I18nModule } from '@common/i18n.module-config';
 import { DatabaseModule } from '@common/kysely.module-config';
-import { KyselyInjectToken, KyselyInstance } from '@kysely';
+import { JwtAuthGuard, JwtStrategy } from '@internal';
+import { KyselyInstance } from '@kysely';
 import { AuthModule as ExposedAuthModule } from '@modules/auth/auth.module';
-import { JwtAuthGuard } from '@modules/auth/guards/auth.guard';
 import { UserModule } from '@modules/user/user.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { CqrsModule } from '@nestjs/cqrs';
-import { resolveEnv } from '@utils/resolve-env';
+import { KyselyInjectToken } from '@third-parties/kysely';
 import { ZodSerializerInterceptor, ZodValidationPipe } from 'nestjs-zod';
+import { resolveEnv } from '../src/config/resolve-env';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import config from './config/env.config';
@@ -43,6 +44,7 @@ import config from './config/env.config';
 	controllers: [AppController],
 	providers: [
 		AppService,
+		JwtStrategy,
 		{
 			provide: APP_PIPE,
 			useClass: ZodValidationPipe,
@@ -58,4 +60,4 @@ import config from './config/env.config';
 		{ provide: APP_INTERCEPTOR, useClass: ZodSerializerInterceptor },
 	],
 })
-export class AppModule { }
+export class AppModule {}

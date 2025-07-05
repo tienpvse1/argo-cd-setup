@@ -8,7 +8,7 @@ import { DefaultAuthMapper } from './mapper';
 @Injectable()
 export class DefaultAuthInfrastructure implements AuthOutboundPort {
 	constructor(@InjectKysely() private readonly kysely: KyselyInstance) {}
-	updateRole(userId: string, role: string): Promise<boolean> {
+	updateRole(_userId: string, _role: string): Promise<boolean> {
 		throw new Error('Method not implemented.');
 	}
 

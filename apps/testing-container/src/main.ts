@@ -1,6 +1,6 @@
 import { initAuth } from '@auth';
-import { setupDocs } from '@common/api-docs';
 import { NestFactory } from '@nestjs/core';
+import { setupDocs } from '@third-parties/api-docs';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -8,7 +8,7 @@ async function bootstrap() {
 	setupDocs(app);
 	initAuth(app);
 
-	await app.listen(process.env.PORT ?? 3000);
+	await app.listen(process.env.PORT ?? 4000);
 	return;
 }
 bootstrap();

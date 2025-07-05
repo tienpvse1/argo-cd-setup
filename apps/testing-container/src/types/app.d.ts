@@ -7,6 +7,8 @@ type HasAbility = {
 declare global {
 	declare namespace Express {
 		interface User extends HasAbility {
+			userId: string;
+			email: string;
 			role: string;
 			isAdmin?: boolean;
 		}
