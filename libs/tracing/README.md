@@ -37,3 +37,26 @@ bootstrap();
 })
 export class AppModule {}
 ```
+
+3. Optionally, you can override Nest default logger globally.
+
+```ts
+// main.ts
+async function bootstrap() {
+    // other codes
+	const app = await NestFactory.create(AppModule);
+    app.useLogger(app.get(OTEL_LOGGER));
+	await app.listen(port);
+}
+bootstrap();
+```
+
+```ts
+// these will be logged in otlp
+Logger.log('message');
+Logger.debug('message');
+Logger.verbose('message');
+Logger.warn('message');
+Logger.error('message');
+```
+
