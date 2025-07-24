@@ -7,6 +7,7 @@ import { JwtAuthGuard, JwtStrategy } from '@internal';
 import { KyselyInstance } from '@kysely';
 import { AuthModule as ExposedAuthModule } from '@modules/auth/auth.module';
 import { UserModule } from '@modules/user/user.module';
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
@@ -18,7 +19,6 @@ import { resolveEnv } from '../src/config/resolve-env';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import config from './config/env.config';
-import { HttpModule } from '@nestjs/axios';
 
 @Module({
 	imports: [
