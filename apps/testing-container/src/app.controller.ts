@@ -1,6 +1,7 @@
-import { Policy } from '@auth/permission/permission.decorator';
+import { IsPublic } from '@internal';
 import { Controller, Get } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { Span } from 'nestjs-otel';
 import { AppService } from './app.service';
 
 @ApiBearerAuth()
@@ -9,7 +10,8 @@ export class AppController {
 	constructor(private readonly appService: AppService) {}
 
 	@Get()
-	@Policy({ permissions: [{ can: 'manage', subject: 'all' }] })
+	@Span()
+	@IsPublic()
 	getHello() {
 		return this.appService.getHello();
 	}

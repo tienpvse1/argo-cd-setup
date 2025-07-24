@@ -12,11 +12,13 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { CqrsModule } from '@nestjs/cqrs';
 import { KyselyInjectToken } from '@third-parties/kysely';
+import { OpenTelemetryModule } from 'nestjs-otel';
 import { ZodSerializerInterceptor, ZodValidationPipe } from 'nestjs-zod';
 import { resolveEnv } from '../src/config/resolve-env';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import config from './config/env.config';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
 	imports: [
@@ -40,6 +42,8 @@ import config from './config/env.config';
 		I18nModule,
 		UserModule,
 		ExposedAuthModule,
+		HttpModule.register({}),
+		OpenTelemetryModule.forRoot(),
 	],
 	controllers: [AppController],
 	providers: [

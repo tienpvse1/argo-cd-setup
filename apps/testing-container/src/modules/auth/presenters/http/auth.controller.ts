@@ -3,7 +3,14 @@ import { IsPublic } from '@internal';
 import { LoginCommand } from '@modules/auth/domains/commands/login.command';
 import { SignupCommand } from '@modules/auth/domains/commands/register.command';
 import { UpdateRoleCommand } from '@modules/auth/domains/commands/update-role.command';
-import { Body, Controller, Patch, Post } from '@nestjs/common';
+import {
+	Body,
+	Controller,
+	HttpCode,
+	HttpStatus,
+	Patch,
+	Post,
+} from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { LoginDto } from './dto/login.dto';
 import { SignUpDto } from './dto/sign-up.dto';
@@ -14,6 +21,7 @@ export class AuthController {
 	constructor(private readonly commandBus: CommandBus) {}
 
 	@Post('login')
+	@HttpCode(HttpStatus.OK)
 	@IsPublic()
 	async login(@Body() input: LoginDto) {
 		return this.commandBus.execute(

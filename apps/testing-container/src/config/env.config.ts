@@ -2,6 +2,7 @@ export default function () {
 	return {
 		app: {
 			host: process.env.APP_HOST,
+			port: +(process.env.APP_PORT ?? '4000'),
 		},
 		betterAuth: {
 			url: process.env.BETTER_AUTH_URL,

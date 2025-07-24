@@ -1,9 +1,16 @@
+import { initializeOtel } from '@app/tracing';
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { setupDocs } from '@third-parties/api-docs';
 import { OrderAppModule } from './order-app.module';
 
 async function bootstrap() {
+	const otel = initializeOtel({
+		serviceName: 'order_service',
+		version: '1.0.0',
+	});
+	otel.start();
 	const app = await NestFactory.create(OrderAppModule);
 	setupDocs(app);
 	app.connectMicroservice<MicroserviceOptions>({
@@ -18,6 +25,9 @@ async function bootstrap() {
 			},
 		},
 	});
-	await app.listen(process.env.port ?? 3000);
+	const port = process.env.port ?? 3000;
+	await app.listen(port, () => {
+		Logger.debug(`App listening at ${port}`);
+	});
 }
 bootstrap();
